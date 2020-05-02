@@ -19,7 +19,7 @@ const Intro = () => (
       </li>
     </ul>
 
-    <Link href="/createForm">
+    <Link href="/CreateForm">
       <a>つくるぞ！</a>
     </Link>
   </Layout>

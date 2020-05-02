@@ -10,7 +10,7 @@ const Result = () => (
     <p>使いにくい。これ作った人はどうかしてるのか</p>
     <p>公開遅くね？</p>
     <p>項目多すぎてめんどすぎるわ</p>
-    <Link href="/createForm">
+    <Link href="/CreateForm">
       <a>作りなおす</a>
     </Link>
   </Layout>

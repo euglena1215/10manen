@@ -1,6 +1,8 @@
 import Document, { Html, Head, Main, NextScript } from "next/document";
 import { ServerStyleSheet } from "styled-components";
 
+import Layout from "../components/Layout";
+
 type Props = {
   styleTags: any;
 };
@@ -26,7 +28,9 @@ export default class MyDocument extends Document<Props> {
           {this.props.styleTags}
         </Head>
         <body>
-          <Main />
+          <Layout>
+            <Main />
+          </Layout>
           <NextScript />
         </body>
       </Html>

@@ -7,7 +7,7 @@ const Index = () => (
   <Layout>
     <Title>10万円支給されるやつ（仮）</Title>
 
-    <Link href="/intro">
+    <Link href="/Intro">
       <a>スタート</a>
     </Link>
   </Layout>

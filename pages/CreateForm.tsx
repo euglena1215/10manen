@@ -51,7 +51,7 @@ const CreateForm = () => (
         <input type="checkbox" name="reallyNeed" />
       </div>
     </Form>
-    <Link href="/result">
+    <Link href="/Result">
       <a>フォーム完成！</a>
     </Link>
   </Layout>

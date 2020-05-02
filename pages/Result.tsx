@@ -1,7 +1,7 @@
 import Link from "next/link";
 import Layout from "../components/Layout";
 
-const Result = () => (
+export default () => (
   <Layout>
     結果画面
     <p>想定財源100億円に対して...</p>
@@ -15,4 +15,3 @@ const Result = () => (
     </Link>
   </Layout>
 );
-export default Result;

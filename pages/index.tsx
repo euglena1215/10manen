@@ -3,7 +3,7 @@ import Link from "next/link";
 
 import Layout from "../components/Layout";
 
-const Index = () => (
+export default () => (
   <Layout>
     <Title>10万円支給されるやつ（仮）</Title>
 
@@ -12,7 +12,6 @@ const Index = () => (
     </Link>
   </Layout>
 );
-export default Index;
 
 const Title = styled.h1`
   font-size: 2.5rem;

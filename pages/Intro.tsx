@@ -1,7 +1,7 @@
 import Layout from "../components/Layout";
 import Link from "next/link";
 
-const Intro = () => (
+export default () => (
   <Layout>
     <h1>せつめい</h1>
     <ul>
@@ -24,4 +24,3 @@ const Intro = () => (
     </Link>
   </Layout>
 );
-export default Intro;

@@ -32,5 +32,5 @@ export default (req: NextApiRequest, res: NextApiResponse<Data>) => {
 const calculateComsumeRate = (inputTypes: string[]) => {
   const initialRate = 3;
 
-  return Math.round(initialRate * 0.85 ** inputTypes.length * 100) / 100;
+  return initialRate * 0.85 ** inputTypes.length;
 };

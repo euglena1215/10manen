@@ -15,7 +15,9 @@ export default ({ query }) => {
     <Layout>
       結果画面
       <p>想定財源{zaigen}億円に対して...</p>
-      <p>{zaigen * Number(consumeRate)}億円使いました！</p>
+      <p>
+        {(zaigen * Number(consumeRate)).toString().slice(0, 3)}億円使いました！
+      </p>
       <p>国民の声</p>
       {formattedUserVoices &&
         formattedUserVoices.map((userVoice) => <p>{userVoice}</p>)}

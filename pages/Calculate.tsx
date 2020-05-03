@@ -27,8 +27,11 @@ export default () => {
             ","
           )}`
         );
-        console.log(consumeRate, userVoices);
       }, 3000);
+
+      Router.prefetch(
+        `/Result?consumeRate=${consumeRate}&userVoices=${userVoices.join(",")}`
+      );
     };
     fetchCalculated();
     return () => clearTimeout(timer);

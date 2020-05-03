@@ -6,12 +6,14 @@
   "author": "Teppei Shintani <teppest1215@gmail.com>",
   "license": "MIT",
   "dependencies": {
+    "axios": "^0.19.2",
     "next": "^9.3.6",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "styled-components": "^5.1.0"
   },
   "devDependencies": {
+    "@types/axios": "^0.14.0",
     "@types/node": "^13.13.4",
     "@types/react": "^16.9.34",
     "@types/styled-components": "^5.1.0",

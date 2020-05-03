@@ -12,7 +12,7 @@ export default () => (
         ただ、国民全員に申請されちゃうと財源無くなっちゃうから良い感じに煩雑にして調整して（笑）
       </p>
 
-      <Link href="/intro5">
+      <Link href="/Intro5">
         <TextBoxNextLinkWrapper>
           <TextBoxNextLink>> 次へ</TextBoxNextLink>
         </TextBoxNextLinkWrapper>

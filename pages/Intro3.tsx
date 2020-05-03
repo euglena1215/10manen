@@ -8,7 +8,7 @@ export default () => (
     <TextBox>
       <p>政府からの案件だよ。私は君を信じてるからね。</p>
 
-      <Link href="/intro4">
+      <Link href="/Intro4">
         <TextBoxNextLinkWrapper>
           <TextBoxNextLink>> 次へ</TextBoxNextLink>
         </TextBoxNextLinkWrapper>

@@ -8,7 +8,7 @@ export default () => (
     <TextBox>
       <p>あなたは受託開発会社の社員。</p>
 
-      <Link href="/intro2">
+      <Link href="/Intro2">
         <TextBoxNextLinkWrapper>
           <TextBoxNextLink>> 次へ</TextBoxNextLink>
         </TextBoxNextLinkWrapper>

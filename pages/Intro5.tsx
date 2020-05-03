@@ -4,19 +4,19 @@ import styled from "styled-components";
 
 export default () => (
   <Layout>
-    <Title>ストーリー</Title>
+    <Title>ルール</Title>
     <TextBox>
-      <p>あなたは受託開発会社の社員。</p>
+      <p>期限までに申請フォームを完成させてください。</p>
 
-      <Link href="/intro2">
+      <Link href="/CreateForm">
         <TextBoxNextLinkWrapper>
-          <TextBoxNextLink>> 次へ</TextBoxNextLink>
+          <TextBoxNextLink>> つくるぞ！</TextBoxNextLink>
         </TextBoxNextLinkWrapper>
       </Link>
     </TextBox>
 
     <ImgWrapper>
-      <img src="/images/intro1.png" alt="" width="400px;" />
+      <img src="/images/intro5.png" alt="" width="400px;" />
     </ImgWrapper>
   </Layout>
 );

@@ -6,9 +6,13 @@ export default () => (
   <Layout>
     <Title>ストーリー</Title>
     <TextBox>
-      <p>あなたは受託開発会社の社員。</p>
+      <p>要件：</p>
+      <p>国民に10万円支給したいから申請フォーム作って！</p>
+      <p>
+        ただ、国民全員に申請されちゃうと財源無くなっちゃうから良い感じに煩雑にして調整して（笑）
+      </p>
 
-      <Link href="/intro2">
+      <Link href="/intro5">
         <TextBoxNextLinkWrapper>
           <TextBoxNextLink>> 次へ</TextBoxNextLink>
         </TextBoxNextLinkWrapper>
@@ -16,7 +20,7 @@ export default () => (
     </TextBox>
 
     <ImgWrapper>
-      <img src="/images/intro1.png" alt="" width="400px;" />
+      <img src="/images/intro4.png" alt="" width="400px;" />
     </ImgWrapper>
   </Layout>
 );

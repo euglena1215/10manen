@@ -6,9 +6,9 @@ export default () => (
   <Layout>
     <Title>ストーリー</Title>
     <TextBox>
-      <p>あなたは受託開発会社の社員。</p>
+      <p>ある日、上司が案件をもってやってきた。</p>
 
-      <Link href="/intro2">
+      <Link href="/intro3">
         <TextBoxNextLinkWrapper>
           <TextBoxNextLink>> 次へ</TextBoxNextLink>
         </TextBoxNextLinkWrapper>
@@ -16,7 +16,7 @@ export default () => (
     </TextBox>
 
     <ImgWrapper>
-      <img src="/images/intro1.png" alt="" width="400px;" />
+      <img src="/images/intro2.png" alt="" width="400px;" />
     </ImgWrapper>
   </Layout>
 );

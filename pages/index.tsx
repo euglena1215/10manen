@@ -10,16 +10,16 @@ export default () => (
       <img src="/images/index.png" alt="" />
     </ImgWrapper>
 
-    <StartLink>
+    <StartLinkWrapper>
       <Link href="/Intro">
-        <a>スタート</a>
+        <StartLink>> スタート</StartLink>
       </Link>
-    </StartLink>
+    </StartLinkWrapper>
   </Layout>
 );
 
 const Title = styled.h1`
-  font-size: 2.5rem;
+  font-size: 2rem;
   text-align: center;
 `;
 
@@ -27,8 +27,16 @@ const ImgWrapper = styled.div`
   text-align: center;
 `;
 
-const StartLink = styled.div`
-  margin: 20px;
+const StartLinkWrapper = styled.div`
   text-align: center;
-  font-size: 1.5rem;
+  margin: 20px;
+`;
+
+const StartLink = styled.a`
+  color: #555;
+  cursor: pointer;
+
+  :hover {
+    color: #000;
+  }
 `;

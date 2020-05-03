@@ -41,15 +41,13 @@ export default () => {
 
 const Title = styled.div`
   margin: 20px;
-  font-size: 2rem;
+  font-size: 1.5rem;
   text-align: center;
 `;
 
 const UserVoice = styled.div``;
 
-const UserVoiceTitle = styled.p`
-  font-size: 1.5rem;
-`;
+const UserVoiceTitle = styled.p``;
 
 const UserVoiceContent = styled.div`
   margin: 10px;

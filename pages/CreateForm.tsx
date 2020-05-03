@@ -6,6 +6,7 @@ import { useState, useRef, useEffect } from "react";
 export type INPUT_ATTRIBUTE = {
   type: INPUT_TYPES;
   name: string;
+  description: string;
   required: boolean;
 };
 
@@ -14,9 +15,9 @@ type INPUT_TYPES = "TEXT" | "TEXT_AREA" | "FILE" | "CHECKBOX";
 const convertHtmlInputTag = (input_type: INPUT_TYPES) => {
   switch (input_type) {
     case "TEXT":
-      return <input type="text" />;
+      return <FormInputText type="text" />;
     case "TEXT_AREA":
-      return <textarea />;
+      return <FormInputTextArea />;
     case "FILE":
       return <input type="file" />;
     case "CHECKBOX":
@@ -40,15 +41,33 @@ export default () => {
     requiredRef.current.checked = inputRequired;
   }, [inputRequired]);
 
+  const [inputDescription, setInputDescription] = useState<string>(null);
+  const descriptionRef = useRef(null);
+  useEffect(() => {
+    descriptionRef.current.value = inputDescription;
+  }, [inputDescription]);
+
   return (
     <Layout>
       <FormPreview action="">
-        {inputAttributes.map((inputAttribute) => (
-          <div>
-            <p>{inputAttribute.name}</p>
-            {convertHtmlInputTag(inputAttribute.type)}
-          </div>
-        ))}
+        <FormPreviewTable>
+          {inputAttributes.map((inputAttribute) => (
+            <tr>
+              <FormPreviewTableName>
+                {inputAttribute.required ? (
+                  <FormPreviewRequired>必須</FormPreviewRequired>
+                ) : null}
+                {inputAttribute.name}
+              </FormPreviewTableName>
+              <FormPreviewTableInputWrapper>
+                <FormPreviewTableDescription>
+                  {inputAttribute.description}
+                </FormPreviewTableDescription>
+                {convertHtmlInputTag(inputAttribute.type)}
+              </FormPreviewTableInputWrapper>
+            </tr>
+          ))}
+        </FormPreviewTable>
       </FormPreview>
       <FormBuilder>
         <FormBuilderTabWrapper>
@@ -57,6 +76,7 @@ export default () => {
               if (selectedTab !== "TEXT") {
                 setSelectedTab("TEXT");
                 setInputName(null);
+                setInputDescription(null);
                 setInputRequired(false);
               }
             }}
@@ -69,6 +89,7 @@ export default () => {
               if (selectedTab !== "TEXT_AREA") {
                 setSelectedTab("TEXT_AREA");
                 setInputName(null);
+                setInputDescription(null);
                 setInputRequired(false);
               }
             }}
@@ -81,6 +102,7 @@ export default () => {
               if (selectedTab !== "FILE") {
                 setSelectedTab("FILE");
                 setInputName(null);
+                setInputDescription(null);
                 setInputRequired(false);
               }
             }}
@@ -93,6 +115,7 @@ export default () => {
               if (selectedTab !== "CHECKBOX") {
                 setSelectedTab("CHECKBOX");
                 setInputName(null);
+                setInputDescription(null);
                 setInputRequired(false);
               }
             }}
@@ -112,6 +135,13 @@ export default () => {
             />
           </p>
           <p>
+            説明：
+            <textarea
+              ref={descriptionRef}
+              onChange={(e) => setInputDescription(e.target.value)}
+            />
+          </p>
+          <p>
             必須？
             <input
               type="checkbox"
@@ -128,6 +158,7 @@ export default () => {
                 {
                   type: selectedTab,
                   name: inputName,
+                  description: inputDescription,
                   required: inputRequired,
                 },
               ])
@@ -155,8 +186,64 @@ export default () => {
 
 const FormPreview = styled.form`
   border: 2px solid #000;
-  min-height: 100px;
+  min-height: 250px;
+  max-height: 400px;
   padding: 10px;
+  background-color: #ffffe0;
+  overflow: scroll;
+`;
+
+const FormPreviewTable = styled.table`
+  width: 90%;
+  margin: auto;
+`;
+
+const FormPreviewTableName = styled.td`
+  border: 1px solid #888;
+  font-size: 0.6rem;
+  padding: 10px;
+  background-color: #f1f1f1;
+  width: 30%;
+  font-weight: bold;
+  color: #444;
+`;
+
+const FormPreviewRequired = styled.span`
+  background-color: #dc143c;
+  color: white;
+  font-weight: normal;
+  border-radius: 2px;
+  padding: 3px 6px;
+  font-size: 0.5rem;
+  margin-right: 5px;
+`;
+
+const FormPreviewTableDescription = styled.p`
+  font-size: 0.5rem;
+  color: #555;
+`;
+
+const FormPreviewTableInputWrapper = styled.td`
+  border: 1px solid #888;
+  background-color: #fff;
+  padding: 10px;
+  width: 70%;
+`;
+
+const FormInputText = styled.input`
+  width: 50%;
+  border-radius: 3px;
+  border: 1px solid #aaa;
+  line-height: 0.8rem;
+  background-color: #f4f4f4;
+`;
+
+const FormInputTextArea = styled.textarea`
+  width: 50%;
+  border-radius: 3px;
+  line-height: 0.8rem;
+  border: 1px solid #aaa;
+  background-color: #f4f4f4;
 `;
 
 const FormBuilder = styled.div`

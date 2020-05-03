@@ -3,7 +3,6 @@ import axios from "axios";
 
 import Layout from "../components/Layout";
 import { useEffect } from "react";
-import { INPUT_ATTRIBUTE } from "./CreateForm";
 
 interface Res {
   consume_rate: number;

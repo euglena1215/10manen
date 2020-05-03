@@ -50,6 +50,7 @@ export default () => {
   return (
     <Layout>
       <FormPreview action="">
+        <FormPreviewTitle>10万円申請書</FormPreviewTitle>
         <FormPreviewTable>
           {inputAttributes.map((inputAttribute) => (
             <tr>
@@ -191,6 +192,11 @@ const FormPreview = styled.form`
   padding: 10px;
   background-color: #ffffe0;
   overflow: scroll;
+`;
+
+const FormPreviewTitle = styled.h1`
+  text-align: center;
+  margin: 20px;
 `;
 
 const FormPreviewTable = styled.table`

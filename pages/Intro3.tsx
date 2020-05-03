@@ -18,6 +18,12 @@ export default () => (
     <ImgWrapper>
       <img src="/images/intro2.png" alt="" width="400px;" />
     </ImgWrapper>
+
+    <Link href="/CreateForm">
+      <SkipLinkWrapper>
+        <SkipLink>>> スキップ</SkipLink>
+      </SkipLinkWrapper>
+    </Link>
   </Layout>
 );
 
@@ -44,6 +50,21 @@ const TextBoxNextLinkWrapper = styled.div`
 const TextBoxNextLink = styled.a`
   color: #555;
   cursor: pointer;
+
+  :hover {
+    color: #000;
+  }
+`;
+
+const SkipLinkWrapper = styled.div`
+  text-align: right;
+  margin: 10px;
+`;
+
+const SkipLink = styled.a`
+  color: #555;
+  cursor: pointer;
+  font-size: 0.7rem;
 
   :hover {
     color: #000;

@@ -1,7 +1,7 @@
 import Layout from "../components/Layout";
 import styled from "styled-components";
 import Link from "next/link";
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 
 export type INPUT_ATTRIBUTE = {
   type: INPUT_TYPES;
@@ -26,6 +26,19 @@ const convertHtmlInputTag = (input_type: INPUT_TYPES) => {
 
 export default () => {
   const [inputAttributes, setInputAttributes] = useState<INPUT_ATTRIBUTE[]>([]);
+  const [selectedTab, setSelectedTab] = useState<INPUT_TYPES>("TEXT");
+
+  const [inputName, setInputName] = useState<string>(null);
+  const nameRef = useRef(null);
+  useEffect(() => {
+    nameRef.current.value = inputName;
+  }, [inputName]);
+
+  const [inputRequired, setInputRequired] = useState<boolean>(false);
+  const requiredRef = useRef(null);
+  useEffect(() => {
+    requiredRef.current.checked = inputRequired;
+  }, [inputRequired]);
 
   return (
     <Layout>
@@ -38,66 +51,91 @@ export default () => {
         ))}
       </FormPreview>
       <FormBuilder>
-        <button
-          onClick={() =>
-            setInputAttributes([
-              ...inputAttributes,
-              { type: "TEXT", name: "名前", required: false },
-            ])
-          }
-        >
-          名前
-        </button>
-        <button
-          onClick={() =>
-            setInputAttributes([
-              ...inputAttributes,
-              { type: "TEXT", name: "住所", required: false },
-            ])
-          }
-        >
-          住所
-        </button>
-        <button
-          onClick={() =>
-            setInputAttributes([
-              ...inputAttributes,
-              { type: "TEXT_AREA", name: "志望動機", required: false },
-            ])
-          }
-        >
-          志望動機
-        </button>
-        <button
-          onClick={() =>
-            setInputAttributes([
-              ...inputAttributes,
-              { type: "TEXT", name: "口座番号", required: false },
-            ])
-          }
-        >
-          口座番号
-        </button>
-        <button
-          onClick={() =>
-            setInputAttributes([
-              ...inputAttributes,
-              { type: "FILE", name: "本人確認種類", required: false },
-            ])
-          }
-        >
-          本人確認種類
-        </button>
-        <button
-          onClick={() =>
-            setInputAttributes([
-              ...inputAttributes,
-              { type: "CHECKBOX", name: "本当に必要ですか？", required: false },
-            ])
-          }
-        >
-          本当に必要ですか？
-        </button>
+        <FormBuilderTabWrapper>
+          <FormBuilderTab
+            onClick={() => {
+              if (selectedTab !== "TEXT") {
+                setSelectedTab("TEXT");
+                setInputName(null);
+                setInputRequired(false);
+              }
+            }}
+            isActive={selectedTab === "TEXT"}
+          >
+            記述項目（短）
+          </FormBuilderTab>
+          <FormBuilderTab
+            onClick={() => {
+              if (selectedTab !== "TEXT_AREA") {
+                setSelectedTab("TEXT_AREA");
+                setInputName(null);
+                setInputRequired(false);
+              }
+            }}
+            isActive={selectedTab === "TEXT_AREA"}
+          >
+            記述項目（長）
+          </FormBuilderTab>
+          <FormBuilderTab
+            onClick={() => {
+              if (selectedTab !== "FILE") {
+                setSelectedTab("FILE");
+                setInputName(null);
+                setInputRequired(false);
+              }
+            }}
+            isActive={selectedTab === "FILE"}
+          >
+            添付ファイル
+          </FormBuilderTab>
+          <FormBuilderTab
+            onClick={() => {
+              if (selectedTab !== "CHECKBOX") {
+                setSelectedTab("CHECKBOX");
+                setInputName(null);
+                setInputRequired(false);
+              }
+            }}
+            isActive={selectedTab === "CHECKBOX"}
+          >
+            チェックボックス
+          </FormBuilderTab>
+        </FormBuilderTabWrapper>
+
+        <FormBuilderContent>
+          <p>
+            項目名：
+            <input
+              type="text"
+              ref={nameRef}
+              onChange={(e) => setInputName(e.target.value)}
+            />
+          </p>
+          <p>
+            必須？
+            <input
+              type="checkbox"
+              ref={requiredRef}
+              checked={inputRequired}
+              onChange={(e) => setInputRequired(e.target.checked)}
+            />
+          </p>
+
+          <button
+            onClick={() =>
+              setInputAttributes([
+                ...inputAttributes,
+                {
+                  type: selectedTab,
+                  name: inputName,
+                  required: inputRequired,
+                },
+              ])
+            }
+          >
+            反映
+          </button>
+        </FormBuilderContent>
       </FormBuilder>
       <Link
         href={{
@@ -116,8 +154,36 @@ export default () => {
 };
 
 const FormPreview = styled.form`
-  border: 1px solid #000;
+  border: 2px solid #000;
   min-height: 100px;
+  padding: 10px;
 `;
 
-const FormBuilder = styled.div``;
+const FormBuilder = styled.div`
+  margin-top: 30px;
+`;
+
+const FormBuilderTabWrapper = styled.div`
+  padding-bottom: 9px;
+`;
+
+const FormBuilderTab = styled.span<{ isActive: boolean }>`
+  font-size: 0.8rem;
+  padding: 10px;
+  border: 2px solid #000;
+  text-align: center;
+  cursor: pointer;
+  border-right: 0;
+  border-bottom: 0;
+  background-color: ${({ isActive }) => (isActive ? "#ddd" : "#fff")};
+
+  :last-child {
+    border-right: 2px solid #000;
+  }
+`;
+
+const FormBuilderContent = styled.div`
+  padding: 10px;
+  border: 2px solid #000;
+  font-size: 0.8rem;
+`;

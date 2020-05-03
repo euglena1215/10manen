@@ -2,17 +2,26 @@ import Router, { useRouter } from "next/router";
 import axios from "axios";
 
 import Layout from "../components/Layout";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
 interface Res {
   consume_rate: number;
   user_voices: string[];
 }
 export default () => {
+  const router = useRouter();
+  const rawInputTypes = router.query.inputTypes;
+  const inputTypes =
+    typeof rawInputTypes === "string"
+      ? rawInputTypes.split(",")
+      : rawInputTypes;
+
   useEffect(() => {
     let timer: number;
     const fetchCalculated = async () => {
-      const { data } = await axios.post<Res>("/api/calculate");
+      const { data } = await axios.post<Res>("/api/calculate", {
+        inputTypes,
+      });
       const consumeRate = data.consume_rate;
       const userVoices = data.user_voices;
       timer = setTimeout(() => {

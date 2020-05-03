@@ -1,10 +1,24 @@
-export default (req, res) => {
+import { NextApiRequest, NextApiResponse } from "next";
+
+type Data = {
+  consume_rate: number;
+  user_voices: string[];
+};
+
+export default (req: NextApiRequest, res: NextApiResponse<Data>) => {
   if (req.method === "POST") {
     res.statusCode = 200;
     res.setHeader("Content-Type", "application/json");
+
+    const rawInputTypes = req.body.inputTypes;
+    const inputTypes =
+      typeof rawInputTypes === "string"
+        ? rawInputTypes.split(",")
+        : rawInputTypes;
+
     res.end(
       JSON.stringify({
-        consume_rate: 10.0,
+        consume_rate: calculateComsumeRate(inputTypes),
         user_voices: [
           "使いにくい。これ作った人はどうかしてるのか",
           "公開遅くね？",
@@ -13,4 +27,10 @@ export default (req, res) => {
       })
     );
   }
+};
+
+const calculateComsumeRate = (inputTypes: string[]) => {
+  const initialRate = 3;
+
+  return Math.round(initialRate * 0.85 ** inputTypes.length * 100) / 100;
 };

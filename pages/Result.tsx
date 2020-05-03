@@ -9,11 +9,13 @@ export default ({ query }) => {
   const formattedUserVoices =
     typeof userVoices === "string" ? userVoices.split(",") : userVoices;
 
+  const zaigen = 100;
+
   return (
     <Layout>
       結果画面
-      <p>想定財源100億円に対して...</p>
-      <p>{100 * Number(consumeRate)}億円使いました！</p>
+      <p>想定財源{zaigen}億円に対して...</p>
+      <p>{zaigen * Number(consumeRate)}億円使いました！</p>
       <p>国民の声</p>
       {formattedUserVoices &&
         formattedUserVoices.map((userVoice) => <p>{userVoice}</p>)}

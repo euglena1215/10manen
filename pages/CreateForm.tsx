@@ -211,7 +211,7 @@ const FormPreviewTitle = styled.h1`
 
 const FormPreviewTable = styled.table`
   width: 90%;
-  margin: auto;
+  margin: 20px auto;
 `;
 
 const FormPreviewTableName = styled.td`

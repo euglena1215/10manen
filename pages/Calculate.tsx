@@ -3,6 +3,7 @@ import axios from "axios";
 
 import Layout from "../components/Layout";
 import { useEffect } from "react";
+import { INPUT_ATTRIBUTE } from "./CreateForm";
 
 interface Res {
   consume_rate: number;
@@ -10,17 +11,13 @@ interface Res {
 }
 export default () => {
   const router = useRouter();
-  const rawInputTypes = router.query.inputTypes;
-  const inputTypes =
-    typeof rawInputTypes === "string"
-      ? rawInputTypes.split(",")
-      : rawInputTypes;
+  const rawInputAttributes = router.query.inputAttributes as string[];
 
   useEffect(() => {
     let timer: number;
     const fetchCalculated = async () => {
       const { data } = await axios.post<Res>("/api/calculate", {
-        inputTypes,
+        inputAttributes: rawInputAttributes,
       });
       const consumeRate = data.consume_rate;
       const userVoices = data.user_voices;

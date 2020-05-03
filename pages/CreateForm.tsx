@@ -3,103 +3,110 @@ import styled from "styled-components";
 import Link from "next/link";
 import { useState } from "react";
 
-const INPUT_TYPES = {
-  NAME: "NAME",
-  ADDRESS: "ADDRESS",
-  WHY: "WHY",
-  ACCOUNT_NUMBER: "ACCOUNT_NUMBER",
-  CONFIRM_FILE: "CONFIRM_FILE",
-  REALLY_NEED: "REALLY_NEED",
+export type INPUT_ATTRIBUTE = {
+  type: INPUT_TYPES;
+  name: string;
+  required: boolean;
 };
 
-const INPUT_TYPE_ELEMENTS = {
-  [INPUT_TYPES.NAME]: (
-    <div>
-      名前：
-      <input type="text" name="name" />
-    </div>
-  ),
-  [INPUT_TYPES.ADDRESS]: (
-    <div>
-      住所：
-      <input type="text" name="address" />
-    </div>
-  ),
-  [INPUT_TYPES.WHY]: (
-    <div>
-      志望動機：
-      <textarea name="why" />
-    </div>
-  ),
-  [INPUT_TYPES.ACCOUNT_NUMBER]: (
-    <div>
-      口座番号：
-      <input type="text" name="accountNumber" />
-    </div>
-  ),
-  [INPUT_TYPES.CONFIRM_FILE]: (
-    <div>
-      本人確認種類：
-      <input type="file" name="confirm" />
-    </div>
-  ),
-  [INPUT_TYPES.REALLY_NEED]: (
-    <div>
-      本当に必要ですか？：
-      <input type="checkbox" name="reallyNeed" />
-    </div>
-  ),
+type INPUT_TYPES = "TEXT" | "TEXT_AREA" | "FILE" | "CHECKBOX";
+
+const convertHtmlInputTag = (input_type: INPUT_TYPES) => {
+  switch (input_type) {
+    case "TEXT":
+      return <input type="text" />;
+    case "TEXT_AREA":
+      return <textarea />;
+    case "FILE":
+      return <input type="file" />;
+    case "CHECKBOX":
+      return <input type="checkbox" />;
+  }
 };
 
 export default () => {
-  const [inputTypes, setInputTypes] = useState<string[]>([]);
+  const [inputAttributes, setInputAttributes] = useState<INPUT_ATTRIBUTE[]>([]);
 
   return (
     <Layout>
-      フォーム作成
-      <div>
+      <FormPreview action="">
+        {inputAttributes.map((inputAttribute) => (
+          <div>
+            <p>{inputAttribute.name}</p>
+            {convertHtmlInputTag(inputAttribute.type)}
+          </div>
+        ))}
+      </FormPreview>
+      <FormBuilder>
         <button
-          onClick={() => setInputTypes([...inputTypes, INPUT_TYPES.NAME])}
+          onClick={() =>
+            setInputAttributes([
+              ...inputAttributes,
+              { type: "TEXT", name: "名前", required: false },
+            ])
+          }
         >
           名前
         </button>
         <button
-          onClick={() => setInputTypes([...inputTypes, INPUT_TYPES.ADDRESS])}
+          onClick={() =>
+            setInputAttributes([
+              ...inputAttributes,
+              { type: "TEXT", name: "住所", required: false },
+            ])
+          }
         >
           住所
         </button>
-        <button onClick={() => setInputTypes([...inputTypes, INPUT_TYPES.WHY])}>
+        <button
+          onClick={() =>
+            setInputAttributes([
+              ...inputAttributes,
+              { type: "TEXT_AREA", name: "志望動機", required: false },
+            ])
+          }
+        >
           志望動機
         </button>
         <button
           onClick={() =>
-            setInputTypes([...inputTypes, INPUT_TYPES.ACCOUNT_NUMBER])
+            setInputAttributes([
+              ...inputAttributes,
+              { type: "TEXT", name: "口座番号", required: false },
+            ])
           }
         >
           口座番号
         </button>
         <button
           onClick={() =>
-            setInputTypes([...inputTypes, INPUT_TYPES.CONFIRM_FILE])
+            setInputAttributes([
+              ...inputAttributes,
+              { type: "FILE", name: "本人確認種類", required: false },
+            ])
           }
         >
           本人確認種類
         </button>
         <button
           onClick={() =>
-            setInputTypes([...inputTypes, INPUT_TYPES.REALLY_NEED])
+            setInputAttributes([
+              ...inputAttributes,
+              { type: "CHECKBOX", name: "本当に必要ですか？", required: false },
+            ])
           }
         >
           本当に必要ですか？
         </button>
-      </div>
-      <Form action="">
-        {inputTypes.map((inputType) => INPUT_TYPE_ELEMENTS[inputType])}
-      </Form>
+      </FormBuilder>
       <Link
         href={{
           pathname: "/Calculate",
-          query: { inputTypes: inputTypes.join(",") },
+          query: {
+            inputAttributes: inputAttributes.map((attr) =>
+              JSON.stringify(attr)
+            ),
+          },
         }}
       >
         <a>フォーム完成！</a>
@@ -108,6 +115,9 @@ export default () => {
   );
 };
 
-const Form = styled.form`
+const FormPreview = styled.form`
   border: 1px solid #000;
+  min-height: 100px;
 `;
+
+const FormBuilder = styled.div``;

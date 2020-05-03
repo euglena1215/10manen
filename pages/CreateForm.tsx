@@ -195,6 +195,7 @@ const FormPreview = styled.form`
 `;
 
 const FormPreviewText = styled.div`
+  position: fixed;
   font-size: 0.6rem;
   background-color: #fff;
   width: 90px;

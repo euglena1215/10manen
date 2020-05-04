@@ -26,7 +26,7 @@ export default () => {
             ","
           )}`
         );
-      }, 3000);
+      }, 1000);
 
       Router.prefetch(
         `/Result?consumeRate=${consumeRate}&userVoices=${userVoices.join(",")}`

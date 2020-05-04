@@ -1,6 +1,8 @@
-import { INPUT_TYPES, INPUT_ATTRIBUTE } from "../pages/CreateForm";
-
 import styled from "styled-components";
+
+import { INPUT_TYPES, INPUT_ATTRIBUTE } from "../pages/CreateForm";
+import InputText from "./InputText";
+import InputTextArea from "./InputTextArea";
 
 export default ({
   inputAttributes,
@@ -108,18 +110,12 @@ const FormPreviewTableInputWrapper = styled.td`
   width: 70%;
 `;
 
-const FormInputText = styled.input`
+const FormInputText = styled(InputText)`
   width: 50%;
-  border-radius: 3px;
-  border: 1px solid #aaa;
-  line-height: 0.8rem;
   background-color: #f4f4f4;
 `;
 
-const FormInputTextArea = styled.textarea`
+const FormInputTextArea = styled(InputTextArea)`
   width: 50%;
-  border-radius: 3px;
-  line-height: 0.8rem;
-  border: 1px solid #aaa;
   background-color: #f4f4f4;
 `;

@@ -3,6 +3,8 @@ import styled from "styled-components";
 import Link from "next/link";
 import { useState, useRef, useEffect } from "react";
 import FormPreview from "../components/FormPreview";
+import InputText from "../components/InputText";
+import InputTextArea from "../components/InputTextArea";
 
 export type INPUT_ATTRIBUTE = {
   type: INPUT_TYPES;
@@ -95,30 +97,38 @@ export default () => {
         </FormBuilderTabWrapper>
 
         <FormBuilderContent>
-          <p>
-            項目名：
-            <input
-              type="text"
-              ref={nameRef}
-              onChange={(e) => setInputName(e.target.value)}
-            />
-          </p>
-          <p>
-            説明：
-            <textarea
-              ref={descriptionRef}
-              onChange={(e) => setInputDescription(e.target.value)}
-            />
-          </p>
-          <p>
-            必須？
-            <input
-              type="checkbox"
-              ref={requiredRef}
-              checked={inputRequired}
-              onChange={(e) => setInputRequired(e.target.checked)}
-            />
-          </p>
+          <table>
+            <tr>
+              <td>項目名：</td>
+              <td>
+                <InputText
+                  type="text"
+                  ref={nameRef}
+                  onChange={(e) => setInputName(e.target.value)}
+                />
+              </td>
+            </tr>
+            <tr>
+              <td>説明：</td>
+              <td>
+                <InputTextArea
+                  ref={descriptionRef}
+                  onChange={(e) => setInputDescription(e.target.value)}
+                />
+              </td>
+            </tr>
+            <tr>
+              <td>必須？</td>
+              <td>
+                <input
+                  type="checkbox"
+                  ref={requiredRef}
+                  checked={inputRequired}
+                  onChange={(e) => setInputRequired(e.target.checked)}
+                />
+              </td>
+            </tr>
+          </table>
 
           <button
             onClick={() =>

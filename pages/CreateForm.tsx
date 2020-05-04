@@ -170,6 +170,7 @@ export default () => {
           </button>
         </FormBuilderContent>
       </FormBuilder>
+
       <Link
         href={{
           pathname: "/Calculate",
@@ -180,7 +181,9 @@ export default () => {
           },
         }}
       >
-        <a>フォーム完成！</a>
+        <CreateFormLinkWrapper>
+          <CreateFormLink>> フォーム完成！</CreateFormLink>
+        </CreateFormLinkWrapper>
       </Link>
     </Layout>
   );
@@ -290,4 +293,19 @@ const FormBuilderContent = styled.div`
   padding: 10px;
   border: 2px solid #000;
   font-size: 0.8rem;
+`;
+
+const CreateFormLinkWrapper = styled.div`
+  text-align: center;
+  margin: 30px;
+`;
+
+const CreateFormLink = styled.a`
+  text-decoration: none;
+  cursor: pointer;
+  color: #555;
+
+  :hover {
+    color: #000;
+  }
 `;

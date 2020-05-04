@@ -37,6 +37,14 @@ export default class MyDocument extends Document<Props> {
       <Html lang="ja">
         <Head>
           <meta charSet="utf-8" />
+          <link
+            href="https://fonts.googleapis.com/css?family=M+PLUS+Rounded+1c"
+            rel="stylesheet"
+          />
+          <link
+            href="https://fonts.googleapis.com/css?family=M+PLUS+1p"
+            rel="stylesheet"
+          />
           {this.props.styleTags}
         </Head>
         <body>

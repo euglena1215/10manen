@@ -161,7 +161,7 @@ const FormBuilder = styled.div`
 `;
 
 const FormBuilderTabWrapper = styled.div`
-  padding-bottom: 9px;
+  padding-bottom: 13px;
 `;
 
 const FormBuilderTab = styled.span<{ isActive: boolean }>`

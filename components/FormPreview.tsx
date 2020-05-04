@@ -52,6 +52,7 @@ const FormPreviewInner = styled.form`
   max-height: 400px;
   background-color: #ffffe0;
   overflow: scroll;
+  font-family: "Sawarabi Mincho";
 `;
 
 const FormPreviewText = styled.div`

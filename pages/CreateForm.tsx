@@ -37,6 +37,14 @@ export default () => {
     descriptionRef.current.value = inputDescription;
   }, [inputDescription]);
 
+  const [isNameRequired, setInNameRequired] = useState(false);
+
+  const clearInput = () => {
+    setInputName(null);
+    setInputDescription(null);
+    setInputRequired(false);
+  };
+
   return (
     <Layout>
       <FormPreview inputAttributes={inputAttributes} />
@@ -46,9 +54,7 @@ export default () => {
             onClick={() => {
               if (selectedTab !== "TEXT") {
                 setSelectedTab("TEXT");
-                setInputName(null);
-                setInputDescription(null);
-                setInputRequired(false);
+                clearInput();
               }
             }}
             isActive={selectedTab === "TEXT"}
@@ -59,9 +65,7 @@ export default () => {
             onClick={() => {
               if (selectedTab !== "TEXT_AREA") {
                 setSelectedTab("TEXT_AREA");
-                setInputName(null);
-                setInputDescription(null);
-                setInputRequired(false);
+                clearInput();
               }
             }}
             isActive={selectedTab === "TEXT_AREA"}
@@ -72,9 +76,7 @@ export default () => {
             onClick={() => {
               if (selectedTab !== "FILE") {
                 setSelectedTab("FILE");
-                setInputName(null);
-                setInputDescription(null);
-                setInputRequired(false);
+                clearInput();
               }
             }}
             isActive={selectedTab === "FILE"}
@@ -85,9 +87,7 @@ export default () => {
             onClick={() => {
               if (selectedTab !== "CHECKBOX") {
                 setSelectedTab("CHECKBOX");
-                setInputName(null);
-                setInputDescription(null);
-                setInputRequired(false);
+                clearInput();
               }
             }}
             isActive={selectedTab === "CHECKBOX"}
@@ -99,13 +99,18 @@ export default () => {
         <FormBuilderContent>
           <table>
             <tr>
-              <td>項目名：</td>
+              <td>
+                項目名<RequiredRed>*</RequiredRed>：
+              </td>
               <td>
                 <InputText
                   type="text"
                   ref={nameRef}
                   onChange={(e) => setInputName(e.target.value)}
                 />
+                {isNameRequired ? (
+                  <RequiredText>項目名は必須です</RequiredText>
+                ) : null}
               </td>
             </tr>
             <tr>
@@ -131,17 +136,23 @@ export default () => {
           </table>
 
           <button
-            onClick={() =>
-              setInputAttributes([
-                ...inputAttributes,
-                {
-                  type: selectedTab,
-                  name: inputName,
-                  description: inputDescription,
-                  required: inputRequired,
-                },
-              ])
-            }
+            onClick={() => {
+              if (inputName && inputName.length !== 0) {
+                setInputAttributes([
+                  ...inputAttributes,
+                  {
+                    type: selectedTab,
+                    name: inputName,
+                    description: inputDescription,
+                    required: inputRequired,
+                  },
+                ]);
+                clearInput();
+                setInNameRequired(false);
+              } else {
+                setInNameRequired(true);
+              }
+            }}
           >
             反映
           </button>
@@ -208,4 +219,13 @@ const CreateFormLink = styled.a`
   :hover {
     color: #000;
   }
+`;
+
+const RequiredRed = styled.span`
+  color: red;
+`;
+
+const RequiredText = styled.span`
+  color: red;
+  font-size: 0.5rem;
 `;

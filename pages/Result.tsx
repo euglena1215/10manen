@@ -138,8 +138,13 @@ const Retry = styled.div`
   color: #000;
   margin: 10px auto;
   font-size: 0.8rem;
+
+  :hover {
+    box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.1), 0 0 0 1px rgba(0, 0, 0, 0.02);
+  }
 `;
 
 const RetryLink = styled.a`
   text-decoration: none;
+  cursor: pointer;
 `;

@@ -3,11 +3,11 @@ import styled from "styled-components";
 
 export default () => {
   return (
-    <ResultBase twitterContent="納期を過ぎて責任を取らされ あなたはクビになりました。">
-      <Title1>納期を過ぎて責任を取らされ</Title1>
+    <ResultBase twitterContent="納期を過ぎたので責任を取らされ あなたはクビになりました。">
+      <Title1>納期を過ぎたので責任を取らされ</Title1>
       <Title2>あなたはクビになりました。</Title2>
       <ImgWrapper>
-        <img src="images/fire.png" width="300px"/>
+        <img src="images/fire.png" width="300px" />
       </ImgWrapper>
     </ResultBase>
   );

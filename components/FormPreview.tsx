@@ -24,7 +24,7 @@ export default ({
             </FormPreviewTableName>
             <FormPreviewTableInputWrapper>
               <FormPreviewTableDescription>
-                {inputAttribute.description}
+                {nl2br(inputAttribute.description)}
               </FormPreviewTableDescription>
               {convertHtmlInputTag(inputAttribute.type)}
             </FormPreviewTableInputWrapper>
@@ -34,6 +34,25 @@ export default ({
     </FormPreviewInner>
   </form>
 );
+
+const nl2br = (text) => {
+  if (text && text.length !== 0) {
+    const regex = /(\n)/g;
+    return (
+      <span>
+        {text.split(regex).map((line) => {
+          if (line.match(regex)) {
+            return <br />;
+          } else {
+            return line;
+          }
+        })}
+      </span>
+    );
+  } else {
+    return null;
+  }
+};
 
 const convertHtmlInputTag = (input_type: INPUT_TYPES) => {
   switch (input_type) {

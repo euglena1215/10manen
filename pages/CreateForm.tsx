@@ -97,7 +97,7 @@ export default () => {
         </FormBuilderTabWrapper>
 
         <FormBuilderContent>
-          <table>
+          <FormBuilderTable>
             <tr>
               <td>
                 項目名<RequiredRed>*</RequiredRed>：
@@ -133,29 +133,31 @@ export default () => {
                 />
               </td>
             </tr>
-          </table>
+          </FormBuilderTable>
 
-          <button
-            onClick={() => {
-              if (inputName && inputName.length !== 0) {
-                setInputAttributes([
-                  ...inputAttributes,
-                  {
-                    type: selectedTab,
-                    name: inputName,
-                    description: inputDescription,
-                    required: inputRequired,
-                  },
-                ]);
-                clearInput();
-                setInNameRequired(false);
-              } else {
-                setInNameRequired(true);
-              }
-            }}
-          >
-            反映
-          </button>
+          <ApplyButtonWrapper>
+            <ApplyButton
+              onClick={() => {
+                if (inputName && inputName.length !== 0) {
+                  setInputAttributes([
+                    ...inputAttributes,
+                    {
+                      type: selectedTab,
+                      name: inputName,
+                      description: inputDescription,
+                      required: inputRequired,
+                    },
+                  ]);
+                  clearInput();
+                  setInNameRequired(false);
+                } else {
+                  setInNameRequired(true);
+                }
+              }}
+            >
+              反映
+            </ApplyButton>
+          </ApplyButtonWrapper>
         </FormBuilderContent>
       </FormBuilder>
 
@@ -182,7 +184,8 @@ const FormBuilder = styled.div`
 `;
 
 const FormBuilderTabWrapper = styled.div`
-  padding-bottom: 13px;
+  display: flex;
+  overflow-x: scroll;
 `;
 
 const FormBuilderTab = styled.span<{ isActive: boolean }>`
@@ -228,4 +231,27 @@ const RequiredRed = styled.span`
 const RequiredText = styled.span`
   color: red;
   font-size: 0.5rem;
+`;
+
+const FormBuilderTable = styled.table`
+  margin: 10px;
+`;
+
+const ApplyButtonWrapper = styled.div`
+  text-align: right;
+  margin-right: 10px;
+  margin-bottom: 10px;
+`;
+
+const ApplyButton = styled.button`
+  background-color: #fff;
+  border-radius: 3px;
+  font-size: 0.8rem;
+  border: 2px solid;
+  padding: 3px 15px;
+  cursor: pointer;
+
+  :hover {
+    box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.1), 0 0 0 1px rgba(0, 0, 0, 0.02);
+  }
 `;

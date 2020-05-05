@@ -52,6 +52,10 @@ export default class MyDocument extends Document<Props> {
           />
           <meta name="twitter:image" content="/images/ogp.png" />
           <meta name="og:image" content="/images/ogp.png" />
+          <meta
+            name="google-site-verification"
+            content="dfKRsACZcuJdEX7MfXlfSd6usQmneHnZbAIVXGQKUJU"
+          />
           {this.props.styleTags}
         </Head>
         <body>

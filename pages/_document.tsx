@@ -45,6 +45,8 @@ export default class MyDocument extends Document<Props> {
             href="https://fonts.googleapis.com/css?family=M+PLUS+1p"
             rel="stylesheet"
           />
+          <meta name="twitter:image" content="/images/ogp.png" />
+          <meta name="og:image" content="/images/ogp.png" />
           {this.props.styleTags}
         </Head>
         <body>

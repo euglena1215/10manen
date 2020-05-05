@@ -37,6 +37,9 @@ export default class MyDocument extends Document<Props> {
       <Html lang="ja">
         <Head>
           <meta charSet="utf-8" />
+          <title>
+            10万円申請書類を適切に煩雑にしてユーザーを離脱させ、想定財源ぴったりに寄せるゲーム
+          </title>
           <link
             href="https://fonts.googleapis.com/css?family=M+PLUS+Rounded+1c"
             rel="stylesheet"

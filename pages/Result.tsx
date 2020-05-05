@@ -5,18 +5,32 @@ import styled from "styled-components";
 
 export default () => {
   const router = useRouter();
-  const { consumeRate, userVoices } = router.query;
+  const {
+    consumeRate,
+    userVoices,
+    clientVoices,
+    userImagePath,
+    clientImagePath,
+  } = router.query;
 
   const formattedUserVoices =
     typeof userVoices === "string" ? userVoices.split(",") : userVoices;
+  const formattedClientVoices =
+    typeof clientVoices === "string" ? clientVoices.split(",") : clientVoices;
 
-  const zaigen = 100;
+  const zaigen = 1000;
+
+  const isAkaji = (rate) => Number(rate) > 1;
 
   return (
     <Layout>
       <Title1>想定財源{zaigen}億円に対して...</Title1>
       <Title2>
-        {(zaigen * Number(consumeRate)).toString().slice(0, 3)}
+        {isAkaji(Number(consumeRate)) ? (
+          <AkajiStyled>{Math.floor(zaigen * Number(consumeRate))}</AkajiStyled>
+        ) : (
+          Math.floor(zaigen * Number(consumeRate))
+        )}
         億円使いました！
       </Title2>
 
@@ -24,11 +38,11 @@ export default () => {
         <ClientVoice>
           <ClientVoiceTitle>政府の声</ClientVoiceTitle>
           <Balloon>
-            <p>いやー、良かったよ！</p>
-            <p>これからもよろしく頼むよ！</p>
+            {formattedClientVoices &&
+              formattedClientVoices.map((clientVoice) => <p>{clientVoice}</p>)}
           </Balloon>
           <ImgWrapper>
-            <img src="/images/client.png" height="200px" />
+            <img src={clientImagePath as string} height="200px" />
           </ImgWrapper>
         </ClientVoice>
         <UserVoice>
@@ -38,7 +52,7 @@ export default () => {
               formattedUserVoices.map((userVoice) => <p>「{userVoice}」</p>)}
           </Balloon>
           <ImgWrapper>
-            <img src="/images/user.png" height="200px" />
+            <img src={userImagePath as string} height="200px" />
           </ImgWrapper>
         </UserVoice>
       </VoiceWrapper>
@@ -147,4 +161,8 @@ const Retry = styled.div`
 const RetryLink = styled.a`
   text-decoration: none;
   cursor: pointer;
+`;
+
+const AkajiStyled = styled.span`
+  color: red;
 `;

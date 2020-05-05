@@ -19,7 +19,7 @@ export default () => (
     </TextBox>
 
     <ImgWrapper>
-      <img src="/images/intro4.png" alt="" width="400px;" />
+      <img src="/images/intro4.png" alt="" width="300px;" />
     </ImgWrapper>
 
     <Link href="/CreateForm">

@@ -6,6 +6,8 @@ import FormPreview from "../components/FormPreview";
 import InputText from "../components/InputText";
 import InputTextArea from "../components/InputTextArea";
 
+import useInterval from "use-interval";
+
 export type INPUT_ATTRIBUTE = {
   type: INPUT_TYPES;
   name: string;
@@ -45,8 +47,57 @@ export default () => {
     setInputRequired(false);
   };
 
+  const MAX_TIME = 60;
+  const [time, setTime] = useState(MAX_TIME);
+  useInterval(() => {
+    setTime(time - 1);
+  }, 1000);
+
+  const currentDate = ((max, time) => {
+    const now = new Date(2020, 3, 1);
+    now.setDate(now.getDate() + max - time);
+    return now;
+  })(MAX_TIME, time);
+  const formatCurretDay = (day) => {
+    switch (day) {
+      case 0:
+        return <>月</>;
+      case 1:
+        return <>火</>;
+      case 2:
+        return <>水</>;
+      case 3:
+        return <>木</>;
+      case 4:
+        return <>金</>;
+      case 5:
+        return <CurrentDateSat>土</CurrentDateSat>;
+      case 6:
+        return <CurrentDateSun>日</CurrentDateSun>;
+    }
+  };
+  const formatCurrentDate = (
+    <>
+      {currentDate.getMonth() + 1}月{currentDate.getDate()}日（
+      {formatCurretDay(currentDate.getDay())}）
+    </>
+  );
+
   return (
     <Layout>
+      <CurrentDate>
+        {formatCurrentDate}
+        <CurrentDateRemain>
+          期限まで残り
+          {time > 0 ? (
+            <CurrentDateRemainDate>{time}</CurrentDateRemainDate>
+          ) : (
+            <CurrentDateRemainDateExceed>{time}</CurrentDateRemainDateExceed>
+          )}
+          日
+        </CurrentDateRemain>
+      </CurrentDate>
+
       <FormPreview
         inputAttributes={inputAttributes}
         onDeleteInputAttribute={(index) => {
@@ -166,7 +217,6 @@ export default () => {
           </ApplyButtonWrapper>
         </FormBuilderContent>
       </FormBuilder>
-
       <Link
         href={{
           pathname: "/Calculate",
@@ -260,4 +310,28 @@ const ApplyButton = styled.button`
   :hover {
     box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.1), 0 0 0 1px rgba(0, 0, 0, 0.02);
   }
+`;
+
+const CurrentDate = styled.div`
+  margin: 20px 0;
+`;
+
+const CurrentDateSat = styled.span`
+  color: blue;
+`;
+
+const CurrentDateSun = styled.span`
+  color: red;
+`;
+
+const CurrentDateRemain = styled.span`
+  font-size: 0.7rem;
+`;
+
+const CurrentDateRemainDate = styled.span`
+  font-size: 1rem;
+`;
+
+const CurrentDateRemainDateExceed = styled(CurrentDateRemainDate)`
+  color: red;
 `;

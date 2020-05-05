@@ -37,7 +37,6 @@ export default class MyDocument extends Document<Props> {
       <Html lang="ja">
         <Head>
           <meta charSet="utf-8" />
-          <title>10万円支給されるやつ</title>
           <meta
             name="description"
             content="10万円申請書類を適切に煩雑にして国民を離脱させ、想定財源ぴったりに寄せるゲーム"

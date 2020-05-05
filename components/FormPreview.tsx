@@ -3,37 +3,56 @@ import styled from "styled-components";
 import { INPUT_TYPES, INPUT_ATTRIBUTE } from "../pages/CreateForm";
 import InputText from "./InputText";
 import InputTextArea from "./InputTextArea";
+import { useState, useEffect } from "react";
 
 export default ({
   inputAttributes,
+  onDeleteInputAttribute,
 }: {
   inputAttributes: INPUT_ATTRIBUTE[];
-}) => (
-  <form action="">
-    <FormPreviewInner>
-      <FormPreviewText>プレビュー</FormPreviewText>
-      <FormPreviewTitle>10万円申請書</FormPreviewTitle>
-      <FormPreviewTable>
-        {inputAttributes.map((inputAttribute) => (
-          <tr>
-            <FormPreviewTableName>
-              {inputAttribute.required ? (
-                <FormPreviewRequired>必須</FormPreviewRequired>
-              ) : null}
-              {inputAttribute.name}
-            </FormPreviewTableName>
-            <FormPreviewTableInputWrapper>
-              <FormPreviewTableDescription>
-                {nl2br(inputAttribute.description)}
-              </FormPreviewTableDescription>
-              {convertHtmlInputTag(inputAttribute.type)}
-            </FormPreviewTableInputWrapper>
-          </tr>
-        ))}
-      </FormPreviewTable>
-    </FormPreviewInner>
-  </form>
-);
+  onDeleteInputAttribute: (index: number) => void;
+}) => {
+  const [hoveredInput, setHoveredInput] = useState<number>(null);
+
+  return (
+    <form action="">
+      <FormPreviewInner>
+        <FormPreviewText>プレビュー</FormPreviewText>
+        <FormPreviewTitle>10万円申請書</FormPreviewTitle>
+        <FormPreviewTable>
+          {inputAttributes.map((inputAttribute, index) => (
+            <FormPreviewTableRow
+              onMouseOver={() => {
+                setHoveredInput(index);
+              }}
+              onMouseLeave={() => {
+                setHoveredInput(null);
+              }}
+            >
+              <FormPreviewTableName>
+                {inputAttribute.required ? (
+                  <FormPreviewRequired>必須</FormPreviewRequired>
+                ) : null}
+                {inputAttribute.name}
+              </FormPreviewTableName>
+              <FormPreviewTableInputWrapper>
+                <FormPreviewTableDescription>
+                  {nl2br(inputAttribute.description)}
+                </FormPreviewTableDescription>
+                {convertHtmlInputTag(inputAttribute.type)}
+                {hoveredInput === index ? (
+                  <CloseButton onClick={() => onDeleteInputAttribute(index)}>
+                    削除
+                  </CloseButton>
+                ) : null}
+              </FormPreviewTableInputWrapper>
+            </FormPreviewTableRow>
+          ))}
+        </FormPreviewTable>
+      </FormPreviewInner>
+    </form>
+  );
+};
 
 const nl2br = (text) => {
   if (text && text.length !== 0) {
@@ -137,4 +156,12 @@ const FormInputText = styled(InputText)`
 const FormInputTextArea = styled(InputTextArea)`
   width: 50%;
   background-color: #f4f4f4;
+`;
+
+const FormPreviewTableRow = styled.tr``;
+
+const CloseButton = styled.span`
+  margin-left: 5px;
+  font-size: 0.6rem;
+  cursor: pointer;
 `;

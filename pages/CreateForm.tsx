@@ -47,7 +47,13 @@ export default () => {
 
   return (
     <Layout>
-      <FormPreview inputAttributes={inputAttributes} />
+      <FormPreview
+        inputAttributes={inputAttributes}
+        onDeleteInputAttribute={(index) => {
+          inputAttributes.splice(index, 1);
+          setInputAttributes(inputAttributes);
+        }}
+      />
       <FormBuilder>
         <FormBuilderTabWrapper>
           <FormBuilderTab

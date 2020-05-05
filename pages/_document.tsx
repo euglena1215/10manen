@@ -40,7 +40,7 @@ export default class MyDocument extends Document<Props> {
           <title>10万円支給されるやつ</title>
           <meta
             name="description"
-            content="10万円申請書類を適切に煩雑にしてユーザーを離脱させ、想定財源ぴったりに寄せるゲーム"
+            content="10万円申請書類を適切に煩雑にして国民を離脱させ、想定財源ぴったりに寄せるゲーム"
           />
           <link
             href="https://fonts.googleapis.com/css?family=M+PLUS+Rounded+1c"

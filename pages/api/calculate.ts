@@ -74,11 +74,7 @@ const calculateUserVoices = (inputAttributes: INPUT_ATTRIBUTE[]) => {
   if (rate > 1) {
     return ["すごい簡単でびっくりした", "やるじゃん", "バラマキ政策じゃね？"];
   } else {
-    return [
-      "使いにくい。これ作った人はどうかしてるのか",
-      "公開遅くね？",
-      "項目多すぎてめんどすぎるわ",
-    ];
+    return ["使いにくい", "項目多すぎてめんどすぎる", "申請させる気ないでしょ"];
   }
 };
 

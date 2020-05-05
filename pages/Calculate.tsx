@@ -8,6 +8,7 @@ import { ApiCalcurateResponse } from "./api/calculate";
 export default () => {
   const router = useRouter();
   const rawInputAttributes = router.query.inputAttributes as string[];
+  const time = Number(router.query.time);
 
   useEffect(() => {
     let timer: number;
@@ -15,6 +16,7 @@ export default () => {
       const { data } = await axios.post<ApiCalcurateResponse>(
         "/api/calculate",
         {
+          time: time,
           inputAttributes: rawInputAttributes,
         }
       );

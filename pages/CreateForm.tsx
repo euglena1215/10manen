@@ -221,6 +221,7 @@ export default () => {
         href={{
           pathname: "/Calculate",
           query: {
+            time: time,
             inputAttributes: inputAttributes.map((attr) =>
               JSON.stringify(attr)
             ),

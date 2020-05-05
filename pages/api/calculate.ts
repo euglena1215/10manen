@@ -17,18 +17,19 @@ export default (
     res.statusCode = 200;
     res.setHeader("Content-Type", "application/json");
 
-    const rawInputAttributes = req.body.inputAttributes;
-
-    let inputAttributes: INPUT_ATTRIBUTE[];
-    if (rawInputAttributes) {
-      if (rawInputAttributes !== 0) {
-        inputAttributes = rawInputAttributes.map((attr) => JSON.parse(attr));
+    const inputAttributes = ((rawInputAttributes) => {
+      let inputAttributes: INPUT_ATTRIBUTE[];
+      if (rawInputAttributes) {
+        if (rawInputAttributes !== 0) {
+          inputAttributes = rawInputAttributes.map((attr) => JSON.parse(attr));
+        } else {
+          inputAttributes = JSON.parse(rawInputAttributes);
+        }
       } else {
-        inputAttributes = JSON.parse(rawInputAttributes);
+        inputAttributes = [];
       }
-    } else {
-      inputAttributes = [];
-    }
+      return inputAttributes;
+    })(req.body.inputAttributes);
 
     res.end(
       JSON.stringify({

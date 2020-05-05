@@ -25,24 +25,36 @@ export default () => {
       const userImagePath = data.user_image_path;
       const clientVoices = data.client_voices;
       const clientImagePath = data.client_image_path;
+      const resultType = data.result_type;
 
-      timer = setTimeout(() => {
-        Router.replace(
-          `/Result?consumeRate=${consumeRate}&userVoices=${userVoices.join(
-            ","
-          )}&clientVoices=${clientVoices.join(
-            ","
-          )}&userImagePath=${userImagePath}&clientImagePath=${clientImagePath}`
-        );
-      }, 3000);
+      switch (resultType) {
+        case "NORMAL":
+          timer = setTimeout(() => {
+            Router.replace(
+              `/Result?consumeRate=${consumeRate}&userVoices=${userVoices.join(
+                ","
+              )}&clientVoices=${clientVoices.join(
+                ","
+              )}&userImagePath=${userImagePath}&clientImagePath=${clientImagePath}`
+            );
+          }, 3000);
 
-      Router.prefetch(
-        `/Result?consumeRate=${consumeRate}&userVoices=${userVoices.join(
-          ","
-        )}&clientVoices=${clientVoices.join(
-          ","
-        )}&userImagePath=${userImagePath}&clientImagePath=${clientImagePath}`
-      );
+          Router.prefetch(
+            `/Result?consumeRate=${consumeRate}&userVoices=${userVoices.join(
+              ","
+            )}&clientVoices=${clientVoices.join(
+              ","
+            )}&userImagePath=${userImagePath}&clientImagePath=${clientImagePath}`
+          );
+          break;
+        case "TIME_LIMIT_EXCEEDED":
+          timer = setTimeout(() => {
+            Router.replace(`/TimeLimitExceeded`);
+          }, 3000);
+
+          Router.prefetch(`/TimeLimitExceeded`);
+          break;
+      }
     };
     fetchCalculated();
 

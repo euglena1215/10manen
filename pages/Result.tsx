@@ -1,8 +1,7 @@
-import Link from "next/link";
 import { useRouter } from "next/router";
 import styled from "styled-components";
 
-import Layout from "../components/Layout";
+import ResultBase from "../components/ResultBase";
 
 const Result = () => {
   const router = useRouter();
@@ -28,7 +27,11 @@ const Result = () => {
   const actual = Math.floor(zaigen * Number(consumeRate));
 
   return (
-    <Layout>
+    <ResultBase
+      twitterContent={`想定財源${zaigen}億円に対して、${actual}億円使いました！%0a国民の声：${formattedUserVoices
+        .map((voice) => `「${voice}」`)
+        .join("")}%0a政府の声：「${formattedClientVoices.join("")}」%0a`}
+    >
       <Title1>想定財源{zaigen}億円に対して...</Title1>
       <Title2>
         {isAkaji(Number(consumeRate)) ? (
@@ -61,26 +64,7 @@ const Result = () => {
           </ImgWrapper>
         </UserVoice>
       </VoiceWrapper>
-
-      <Link href="/CreateForm">
-        <LinkWrapper>
-          <LinkText>つくり直す</LinkText>
-        </LinkWrapper>
-      </Link>
-
-      <LinkWrapper>
-        <LinkText
-          href={`http://twitter.com/share?url=https://10manen.now.sh/&text=想定財源${zaigen}億円に対して、${actual}億円使いました！%0a国民の声：${formattedUserVoices
-            .map((voice) => `「${voice}」`)
-            .join("")}%0a政府の声：「${formattedClientVoices.join(
-            ""
-          )}」%0a&hashtags=10万円支給されるやつ`}
-          target="_blank"
-        >
-          Twitterで共有する
-        </LinkText>
-      </LinkWrapper>
-    </Layout>
+    </ResultBase>
   );
 };
 export default Result;
@@ -160,26 +144,6 @@ const Balloon = styled.div`
 
 const ImgWrapper = styled.div`
   text-align: center;
-`;
-
-const LinkWrapper = styled.div`
-  border: 2px solid;
-  border-radius: 3px;
-  padding: 10px;
-  width: 30%;
-  text-align: center;
-  margin: 10px auto;
-  font-size: 0.8rem;
-
-  :hover {
-    box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.1), 0 0 0 1px rgba(0, 0, 0, 0.02);
-  }
-`;
-
-const LinkText = styled.a`
-  text-decoration: none;
-  color: #000;
-  cursor: pointer;
 `;
 
 const AkajiStyled = styled.span`

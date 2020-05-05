@@ -7,7 +7,10 @@ export type ApiCalcurateResponse = {
   user_image_path: string;
   client_voices: string[];
   client_image_path: string;
+  result_type: RESULT_TYPE;
 };
+
+type RESULT_TYPE = "NORMAL" | "TIME_LIMIT_EXCEEDED";
 
 export default (
   req: NextApiRequest,
@@ -31,6 +34,8 @@ export default (
       return inputAttributes;
     })(req.body.inputAttributes);
 
+    const time = Number(req.body.time);
+
     res.end(
       JSON.stringify({
         consume_rate: calculateComsumeRate(inputAttributes),
@@ -38,6 +43,7 @@ export default (
         user_image_path: calculateUserImagePath(inputAttributes),
         client_voices: calculateClientVoices(inputAttributes),
         client_image_path: calculateClientImagePath(inputAttributes),
+        result_type: calculateResultType(time),
       })
     );
   }
@@ -86,5 +92,13 @@ const calculateClientVoices = (inputAttributes: INPUT_ATTRIBUTE[]) => {
     return ["話と違うじゃないか！", "どうしてくれるんだ！！！"];
   } else {
     return ["いやー、良かったよ！", "これからもよろしく頼むよ！"];
+  }
+};
+
+const calculateResultType = (time: number): RESULT_TYPE => {
+  if (time > 0) {
+    return "NORMAL";
+  } else {
+    return "TIME_LIMIT_EXCEEDED";
   }
 };

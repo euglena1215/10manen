@@ -1,9 +1,10 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
-import Layout from "../components/Layout";
 import styled from "styled-components";
 
-export default () => {
+import Layout from "../components/Layout";
+
+const Result = () => {
   const router = useRouter();
   const {
     consumeRate,
@@ -14,9 +15,11 @@ export default () => {
   } = router.query;
 
   const formattedUserVoices =
-    typeof userVoices === "string" ? userVoices.split(",") : userVoices;
+    typeof userVoices === "string" ? userVoices.split(",") : userVoices || [];
   const formattedClientVoices =
-    typeof clientVoices === "string" ? clientVoices.split(",") : clientVoices;
+    typeof clientVoices === "string"
+      ? clientVoices.split(",")
+      : clientVoices || [];
 
   const zaigen = 1000;
 
@@ -80,6 +83,7 @@ export default () => {
     </Layout>
   );
 };
+export default Result;
 
 const Title1 = styled.p`
   margin: 20px;

@@ -67,7 +67,11 @@ export default () => {
 
       <LinkWrapper>
         <LinkText
-          href={`http://twitter.com/share?url=https://10manen.now.sh/&text=想定財源${zaigen}億円に対して、${actual}億円使いました！&hashtags=10万円支給されるやつ`}
+          href={`http://twitter.com/share?url=https://10manen.now.sh/&text=想定財源${zaigen}億円に対して、${actual}億円使いました！%0a国民の声：${formattedUserVoices
+            .map((voice) => `「${voice}」`)
+            .join("")}%0a政府の声：「${formattedClientVoices.join(
+            ""
+          )}」%0a&hashtags=10万円支給されるやつ`}
           target="_blank"
         >
           Twitterで共有する

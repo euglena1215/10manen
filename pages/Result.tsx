@@ -22,14 +22,16 @@ export default () => {
 
   const isAkaji = (rate) => Number(rate) > 1;
 
+  const actual = Math.floor(zaigen * Number(consumeRate));
+
   return (
     <Layout>
       <Title1>想定財源{zaigen}億円に対して...</Title1>
       <Title2>
         {isAkaji(Number(consumeRate)) ? (
-          <AkajiStyled>{Math.floor(zaigen * Number(consumeRate))}</AkajiStyled>
+          <AkajiStyled>{actual}</AkajiStyled>
         ) : (
-          Math.floor(zaigen * Number(consumeRate))
+          actual
         )}
         億円使いました！
       </Title2>
@@ -58,10 +60,19 @@ export default () => {
       </VoiceWrapper>
 
       <Link href="/CreateForm">
-        <RetryLink>
-          <Retry>つくり直す</Retry>
-        </RetryLink>
+        <LinkWrapper>
+          <LinkText>つくり直す</LinkText>
+        </LinkWrapper>
       </Link>
+
+      <LinkWrapper>
+        <LinkText
+          href={`http://twitter.com/share?url=https://10manen.now.sh/&text=想定財源${zaigen}億円に対して、${actual}億円使いました！&hashtags=10万円支給されるやつ`}
+          target="_blank"
+        >
+          Twitterで共有する
+        </LinkText>
+      </LinkWrapper>
     </Layout>
   );
 };
@@ -143,13 +154,12 @@ const ImgWrapper = styled.div`
   text-align: center;
 `;
 
-const Retry = styled.div`
+const LinkWrapper = styled.div`
   border: 2px solid;
   border-radius: 3px;
   padding: 10px;
-  width: 120px;
+  width: 30%;
   text-align: center;
-  color: #000;
   margin: 10px auto;
   font-size: 0.8rem;
 
@@ -158,8 +168,9 @@ const Retry = styled.div`
   }
 `;
 
-const RetryLink = styled.a`
+const LinkText = styled.a`
   text-decoration: none;
+  color: #000;
   cursor: pointer;
 `;
 

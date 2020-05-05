@@ -25,7 +25,7 @@ export default () => {
       const clientImagePath = data.client_image_path;
 
       timer = setTimeout(() => {
-        Router.push(
+        Router.replace(
           `/Result?consumeRate=${consumeRate}&userVoices=${userVoices.join(
             ","
           )}&clientVoices=${clientVoices.join(
